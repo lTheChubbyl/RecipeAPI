@@ -8812,11 +8812,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ICT\\PiOWP\\api\\RecipeAPI\\RecipeAPI\\RecipeAPI.csproj",
+      "projectUniqueName": "D:\\ICT\\PiOWP\\RecipeAPI\\RecipeAPI\\RecipeAPI.csproj",
       "projectName": "RecipeAPI",
-      "projectPath": "D:\\ICT\\PiOWP\\api\\RecipeAPI\\RecipeAPI\\RecipeAPI.csproj",
+      "projectPath": "D:\\ICT\\PiOWP\\RecipeAPI\\RecipeAPI\\RecipeAPI.csproj",
       "packagesPath": "C:\\Users\\Atlas\\.nuget\\packages\\",
-      "outputPath": "D:\\ICT\\PiOWP\\api\\RecipeAPI\\RecipeAPI\\obj\\",
+      "outputPath": "D:\\ICT\\PiOWP\\RecipeAPI\\RecipeAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Atlas\\AppData\\Roaming\\NuGet\\NuGet.Config",

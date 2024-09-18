@@ -5,7 +5,7 @@ namespace RecipeAPI.Models
 {
     public class CommentDto
     {
-        public int? Id { get; set; } // Nullable for creation
+        public int? Id { get; set; }
 
         [Required]
         public string Content { get; set; }
@@ -13,8 +13,10 @@ namespace RecipeAPI.Models
         [Required]
         public int RecipeId { get; set; }
 
-        public string AuthorId { get; set; } // Optional for creation; typically populated by the server
+        public string AuthorId { get; set; }
+        public string AuthorName { get; set; }
 
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; set; }
+        public string CreatedAtFormatted => CreatedAt.ToString("f");
     }
 }

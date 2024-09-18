@@ -47,7 +47,7 @@
   },
   {
     "ContainingType": "RecipeAPI.Controllers.CommentsController",
-    "Method": "GetComment",
+    "Method": "GetCommentsForRecipe",
     "RelativePath": "api/Comments/{id}",
     "HttpMethod": "GET",
     "IsController": true,
@@ -61,7 +61,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "RecipeAPI.Models.CommentDto",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[RecipeAPI.Models.CommentDto, RecipeAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

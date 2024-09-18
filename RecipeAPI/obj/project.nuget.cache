@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3G/LS8hOg2k=",
+  "dgSpecHash": "eG8RJmW9Fwg=",
   "success": true,
-  "projectFilePath": "D:\\ICT\\PiOWP\\api\\RecipeAPI\\RecipeAPI\\RecipeAPI.csproj",
+  "projectFilePath": "D:\\ICT\\PiOWP\\RecipeAPI\\RecipeAPI\\RecipeAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Atlas\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Atlas\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

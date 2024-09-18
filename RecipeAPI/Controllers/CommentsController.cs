@@ -44,28 +44,29 @@ namespace RecipeAPI.Controllers
 
         // GET: api/Comments/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<CommentDto>> GetComment(int id)
+        public async Task<ActionResult<IEnumerable<CommentDto>>> GetCommentsForRecipe(int id)
         {
-            var comment = await _context.Comments
+            var comments = await _context.Comments
                 .Include(c => c.Author)
                 .Include(c => c.Recipe)
-                .Where(c => c.Id == id)
+                .Where(c => c.RecipeId == id)
                 .Select(c => new CommentDto
                 {
                     Id = c.Id,
                     Content = c.Content,
                     RecipeId = c.RecipeId,
                     AuthorId = c.AuthorId,
-                    CreatedAt = c.CreatedAt
+                    CreatedAt = c.CreatedAt,
+                    AuthorName = c.Author.FirstName + " " + c.Author.LastName,
                 })
-                .FirstOrDefaultAsync();
+                .ToListAsync(); // Return a list of comments
 
-            if (comment == null)
+            if (!comments.Any())
             {
-                return NotFound(new { message = "Comment not found" });
+                return NotFound(new { message = "No comments found for this recipe" });
             }
 
-            return Ok(comment);
+            return Ok(comments);
         }
 
         // POST: api/Comments
@@ -84,30 +85,37 @@ namespace RecipeAPI.Controllers
                 return BadRequest(new { message = "Recipe not found" });
             }
 
+            var userId =commentDto.AuthorId;
+
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return BadRequest(new { message = "User not found" });
+            }
+
             var comment = new Comment
             {
                 Content = commentDto.Content,
                 RecipeId = commentDto.RecipeId,
-                CreatedAt = commentDto.CreatedAt
+                CreatedAt = DateTime.UtcNow, // Set current time when creating the comment
+                AuthorId = user.Id
             };
-
-            // Set the AuthorId based on the currently authenticated user
-            var userId = User.Identity?.Name;
-            if (userId != null)
-            {
-                var user = await _userManager.FindByNameAsync(userId);
-                if (user != null)
-                {
-                    comment.AuthorId = user.Id;
-                }
-            }
 
             _context.Comments.Add(comment);
             await _context.SaveChangesAsync();
 
-            commentDto.Id = comment.Id; // Set the ID for the returned DTO
+            // Create the response DTO including the author's name
+            var responseDto = new CommentDto
+            {
+                Id = comment.Id,
+                Content = comment.Content,
+                RecipeId = comment.RecipeId,
+                AuthorId = comment.AuthorId,
+                CreatedAt = comment.CreatedAt,
+                AuthorName = user.FirstName + " " + user.LastName // Assuming `AuthorName` is added to CommentDto
+            };
 
-            return CreatedAtAction(nameof(GetComment), new { id = comment.Id }, commentDto);
+            return CreatedAtAction(nameof(GetCommentsForRecipe), new { id = comment.RecipeId }, responseDto);
         }
 
         // DELETE: api/Comments/5
