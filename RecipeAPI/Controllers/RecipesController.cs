@@ -45,7 +45,7 @@ namespace RecipeAPI.Controllers
                         .ToList(),
                     ExtendedIngredients = r.ExtendedIngredients,
                     AnalyzedInstructions = r.AnalyzedInstructions,
-                    AuthorName = r.Author.UserName  // Assuming ApplicationUser has a UserName property
+                    AuthorName = r.Author.FirstName + " " + r.Author.LastName  // Assuming ApplicationUser has a UserName property
                 })
                 .ToListAsync();
 
